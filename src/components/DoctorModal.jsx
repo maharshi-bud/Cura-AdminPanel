@@ -21,45 +21,44 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
     <div className="modal-overlay">
 
       <div className="modal">
+  <h2>Edit Doctor</h2>
 
-        <h2>Edit Doctor</h2>
+  <div className="modal-grid">
 
-        <input
-          name="fullName"
-          value={form.fullName || ""}
-          onChange={handleChange}
-          placeholder="Full Name"
-        />
+    <div className="input-group">
+      <label>Full Name</label>
+      <input name="fullName" value={form.fullName || ""} onChange={handleChange} />
+    </div>
 
-        <input
-          name="email"
-          value={form.email || ""}
-          onChange={handleChange}
-          placeholder="Email"
-        />
+    <div className="input-group">
+      <label>Email</label>
+      <input name="email" value={form.email || ""} onChange={handleChange} />
+    </div>
 
-        <input
-          name="clinicName"
-          value={form.clinicName || ""}
-          onChange={handleChange}
-          placeholder="Clinic"
-        />
+    <div className="input-group">
+      <label>Clinic</label>
+      <input name="clinicName" value={form.clinicName || ""} onChange={handleChange} />
+    </div>
 
-        <input
-          name="specialization"
-          value={form.specialization || ""}
-          onChange={handleChange}
-          placeholder="Specialization"
-        />
+    <div className="input-group">
+      <label>Specialization</label>
+      <input name="specialization" value={form.specialization || ""} onChange={handleChange} />
+    </div>
 
-        <div className="modal-actions">
-          <button onClick={onClose}>Cancel</button>
-          <button className="primary" onClick={handleSubmit}>
-            Save
-          </button>
-        </div>
+    <div className="input-group full">
+      <label>Experience</label>
+      <input name="experience" value={form.experience || ""} onChange={handleChange} />
+    </div>
 
-      </div>
+  </div>
+
+  <div className="modal-actions">
+    <button onClick={onClose}>Cancel</button>
+    <button className="primary" onClick={handleSubmit}>Save Changes</button>
+  </div>
+</div>
+
+
     </div>
   );
 }
