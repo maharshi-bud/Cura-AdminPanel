@@ -103,16 +103,16 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* 🔷 GRID */}
+        {/* 🔷 Table */}
         <div className="table-container">
-
   <table className="doctor-table">
+
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
+        <th>Doctor</th>
         <th>Clinic</th>
         <th>Specialization</th>
+        <th>Experience</th>
         <th>Plan</th>
         <th>Payment</th>
         <th>Actions</th>
@@ -122,42 +122,64 @@ function AdminDashboard() {
     <tbody>
       {filteredDoctors.map((doc) => (
         <tr key={doc._id}>
-          
-          <td className="name-cell">
-            {/* <div className="avatar small">
+
+          {/* 👤 NAME + EMAIL */}
+          <td className="doctor-cell">
+            <div className="avatar small">
               {doc.fullName?.charAt(0)}
-            </div> */}
-            {doc.fullName}
+            </div>
+
+            <div className="doctor-info">
+              <strong>{doc.fullName}</strong>
+              <span>{doc.email}</span>
+            </div>
           </td>
 
-          <td>{doc.email}</td>
-          <td>{doc.clinicName}</td>
-          <td>{doc.specialization}</td>
+          {/* 🏥 CLINIC */}
+          <td>{doc.clinicName || "—"}</td>
 
+          {/* 🩺 SPECIALIZATION */}
+          <td>{doc.specialization || "—"}</td>
+
+          {/* 💼 EXPERIENCE */}
           <td>
-            <span className="tag">
-              {doc.plan?.name || "No Plan"}
+            <span className="experience-badge">
+              {doc.experience ? `${doc.experience} yrs` : "—"}
             </span>
           </td>
 
+          {/* 💎 PLAN */}
+          <td>
+            <span className={`tag ${doc.plan?.name === "Premium" ? "premium" : ""}`}>
+              {doc.plan?.name || "Free"}
+            </span>
+          </td>
+
+          {/* 💳 PAYMENT */}
           <td>
             <span className="tag secondary">
               {doc.paymentMethod || "N/A"}
             </span>
           </td>
 
+          {/* ⚙️ ACTIONS */}
           <td>
             <div className="table-actions">
-              <button onClick={() => handleEdit(doc)}>Edit</button>
-              <button onClick={() => handleDelete(doc._id)}>Delete</button>
+              <button className="edit-btn" onClick={() => handleEdit(doc)}>
+                ✏️ Edit
+              </button>
+
+              <button className="delete-btn" onClick={() => handleDelete(doc._id)}>
+                🗑 Delete
+              </button>
             </div>
           </td>
 
         </tr>
       ))}
     </tbody>
-  </table>
 
+  </table>
 </div>
 
       </div>

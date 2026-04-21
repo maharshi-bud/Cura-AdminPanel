@@ -7,8 +7,13 @@ function App() {
     !!localStorage.getItem("token")
   );
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuth(false);
+  };
+
   return isAuth ? (
-    <AdminDashboard />
+    <AdminDashboard onLogout={handleLogout} />
   ) : (
     <Login onLogin={() => setIsAuth(true)} />
   );

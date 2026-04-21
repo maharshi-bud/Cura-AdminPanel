@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from "../services/api";
+import docpic from "../img/Doc.png";
+import bg from "../img/BG.jpg";
 import "./login.css";
 
 function Login({ onLogin }) {
@@ -18,7 +20,6 @@ function Login({ onLogin }) {
 
     try {
       const res = await loginUser(form);
-
       if (res.token) {
         localStorage.setItem("token", res.token);
         onLogin();
@@ -26,74 +27,75 @@ function Login({ onLogin }) {
         setError(res.msg || "Invalid credentials");
       }
     } catch {
-      setError("Server error. Please try again.");
+      setError("Server error");
     }
 
     setLoading(false);
   };
 
   return (
-    <div className="login-page">
+    <div
+      className="login-page"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
+      <div className="overlay"></div>
 
-      {/* 🔷 BACKGROUND DECOR */}
-      <div className="bg-shape shape1"></div>
-      <div className="bg-shape shape2"></div>
+      <div className="login-card">
 
-      {/* 🔷 HEADER */}
-      <div className="login-header">
-        <div className="logo">H</div>
-        <h1>HOMEOSUITE</h1>
-        <p>Smart Healthcare Admin Platform</p>
+        {/* LEFT → IMAGE */}
+        <div className="card-left">
+          <img src={docpic} alt="Doctor" />
+        </div>
+
+        {/* RIGHT → FORM */}
+        <div className="card-right">
+
+          <div className="brand">
+            <div className="logo">H</div>
+            <h1>HOMEOSUITE</h1>
+            <p>Smart Healthcare Admin Platform</p>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+
+            <h2>Welcome back 👋</h2>
+            <p className="subtitle">Sign in to continue</p>
+
+            {error && <div className="error">{error}</div>}
+
+            <div className="input-group">
+              <label>Email</label>
+              <input
+                name="email"
+                type="email"
+                placeholder="admin@homeosuite.com"
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="input-group password-group">
+              <label>Password</label>
+              <input
+                name="password"
+                type={show ? "text" : "password"}
+                placeholder="••••••••"
+                onChange={handleChange}
+                required
+              />
+              <span onClick={() => setShow(!show)}>
+                {show ? "Hide" : "Show"}
+              </span>
+            </div>
+
+            <button disabled={loading}>
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+
+          </form>
+
+        </div>
       </div>
-
-      {/* 🔷 CARD */}
-      <form className="login-card" onSubmit={handleSubmit}>
-
-        <h2>Welcome back 👋</h2>
-        <p className="subtitle">Sign in to your admin account</p>
-
-        {error && <div className="error">{error}</div>}
-
-        {/* EMAIL */}
-        <div className="input-group">
-          <label>Email</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="admin@homeosuite.com"
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* PASSWORD */}
-        <div className="input-group password-group">
-          <label>Password</label>
-          <input
-            name="password"
-            type={show ? "text" : "password"}
-            placeholder="••••••••"
-            onChange={handleChange}
-            required
-          />
-          <span
-            className="toggle"
-            onClick={() => setShow(!show)}
-          >
-            {show ? "Hide" : "Show"}
-          </span>
-        </div>
-
-        <button className="login-btn" disabled={loading}>
-          {loading ? "Signing in..." : "Sign In"}
-        </button>
-
-      </form>
-
-      <p className="login-footer">
-        © {new Date().getFullYear()} HomeoSuite
-      </p>
-
     </div>
   );
 }

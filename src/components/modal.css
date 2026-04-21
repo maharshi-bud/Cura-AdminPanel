@@ -1,0 +1,205 @@
+/* 🔷 OVERLAY */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* 🔷 CARD */
+.modal-card {
+  width: 620px;
+  max-width: 95%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px 35px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* 🔷 TITLE */
+.modal-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1f8a78;
+  font-weight: 600;
+}
+
+/* 🔷 GRID */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* full width */
+.input-group.full {
+  grid-column: span 2;
+}
+
+/* 🔷 INPUT GROUP */
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* LABEL */
+.input-group label {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: #475569;
+  font-weight: 500;
+}
+
+/* 🔥 INPUT (FIXED VISIBILITY) */
+.input-group input {
+  padding: 12px;
+  border-radius: 10px;
+
+  /* 👇 THIS FIXES YOUR ISSUE */
+  background: #4f759b;              /* visible light bg */
+  border: 1px solid #cbd5f5;        /* stronger border */
+  color: #0f172a;                   /* dark text */
+
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* PLACEHOLDER */
+.input-group input::placeholder {
+  color: #5e7fae;
+}
+
+/* FOCUS */
+.input-group input:focus {
+  border-color: #1f8a78;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(31,138,120,0.15);
+}
+
+/* 🔷 ACTIONS */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+/* CANCEL */
+.cancel-btn {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #cbd5e1;
+}
+
+/* SAVE */
+.save-btn {
+  background: linear-gradient(135deg, #1f8a78, #4f46e5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+/* 🔥 FORCE TEXT COLOR */
+.doctor-modal input {
+  color: #0f172a !important;        /* DARK TEXT */
+  background: #ffffff !important;   /* WHITE BG */
+  border: 2px solid #cbd5e1 !important;
+}
+
+/* 🔥 PLACEHOLDER FIX */
+.doctor-modal input::placeholder {
+  color: #001c44 !important;
+}
+
+/* 🔥 FIX LABEL VISIBILITY */
+.doctor-modal label {
+  color: #334155 !important;
+}
+
+
+/* 🔷 DEFAULT INPUT (VISIBLE BORDER ALWAYS) */
+.input {
+  width: 100%;
+  padding: 12px;
+
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;   /* 👈 ALWAYS visible */
+  border-radius: 10px;
+
+  color: #0f172a;
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+/* 🔷 HOVER (subtle feedback) */
+.input:hover {
+  border-color: #94a3b8;
+}
+
+/* 🔷 FOCUS (strong highlight) */
+.input:focus {
+  border-color: #1f8a78;
+  box-shadow: 0 0 0 3px rgba(31,138,120,0.15);
+}
+
+
+/* 🔥 SUPER SCOPED INPUT FIX */
+.doctor-modal .modal-input {
+  width: 100%;
+  padding: 12px;
+
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 10px;
+
+  color: #0f172a !important;
+  font-size: 14px;
+
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* 🔥 PLACEHOLDER */
+.doctor-modal .modal-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* 🔥 HOVER */
+.doctor-modal .modal-input:hover {
+  border-color: #94a3b8 !important;
+}
+
+/* 🔥 FOCUS */
+.doctor-modal .modal-input:focus {
+  border-color: #1f8a78 !important;
+  box-shadow: 0 0 0 3px rgba(31,138,120,0.15);
+  background: #ffffff !important;
+}
+
+/* 🔥 LABEL FIX */
+.doctor-modal label {
+  color: #334155 !important;
+  font-weight: 500;
+}

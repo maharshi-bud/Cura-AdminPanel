@@ -221,129 +221,6 @@ body {
   color: white;
 }
 
-/* 🔷 MODAL OVERLAY */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-}
-
-/* 🔷 MODAL BOX */
-.modal {
-  width: 100%;
-  max-width: 600px;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 25px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-
-  animation: modalIn 0.3s ease;
-}
-
-/* 🔷 ANIMATION */
-@keyframes modalIn {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* 🔷 TITLE */
-.modal h2 {
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #1e293b;
-}
-
-/* 🔷 FORM GRID */
-.modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-/* 🔷 FULL WIDTH INPUT */
-.modal-grid .full {
-  grid-column: span 2;
-}
-
-/* 🔷 INPUT */
-.modal input,
-.modal select {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
-  outline: none;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-/* 🔷 INPUT FOCUS */
-.modal input:focus,
-.modal select:focus {
-  border-color: #1f8a78;
-  box-shadow: 0 0 0 2px rgba(31,138,120,0.15);
-}
-
-/* 🔷 LABEL */
-.modal label {
-  font-size: 12px;
-  color: #64748b;
-  margin-bottom: 4px;
-  display: block;
-}
-
-/* 🔷 INPUT GROUP */
-.input-group {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 🔷 ACTION BUTTONS */
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 25px;
-}
-
-/* CANCEL */
-.modal-actions button {
-  padding: 10px 16px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-/* CANCEL BUTTON */
-.modal-actions button:first-child {
-  background: #f1f5f9;
-  color: #475569;
-}
-
-/* SAVE BUTTON */
-.modal-actions .primary {
-  background: linear-gradient(135deg, #1f8a78, #4f46e5);
-  color: white;
-  font-weight: 500;
-}
-
-/* HOVER */
-.modal-actions .primary:hover {
-  opacity: 0.9;
-}
-
 
 /* 🔷 TABLE CONTAINER */
 .table-container {
@@ -365,7 +242,7 @@ body {
 }
 
 .doctor-table th {
-  text-align: left;
+  text-align: center;
   padding: 14px;
   font-size: 13px;
   color: #64748b;
@@ -400,7 +277,9 @@ body {
 
 /* 🔷 ACTION BUTTONS */
 .table-actions {
-  display: flex;
+ display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;
   gap: 8px;
 }
 
@@ -422,4 +301,109 @@ body {
 .table-actions button:last-child {
   background: #fee2e2;
   color: #dc2626;
+}
+
+/* 🔥 DOCTOR CELL (avatar + info) */
+.doctor-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctor-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-info span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* 🔥 EXPERIENCE BADGE */
+.experience-badge {
+  background: #f1f5f9;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #334155;
+}
+
+/* 🔥 PREMIUM PLAN */
+.tag.premium {
+  background: #ecfdf5;
+  color: #059669;
+  font-weight: 600;
+}
+
+/* 🔥 ACTION BUTTONS (UPGRADED) */
+.edit-btn {
+  background: #eef2ff;
+  color: #4f46e5;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.edit-btn:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+.delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  color: white;
+}
+
+/* 🔥 TABLE IMPROVEMENTS */
+.doctor-table th {
+  background: #f8fafc;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.doctor-table tbody tr {
+  transition: 0.2s;
+}
+
+.doctor-table tbody tr:hover {
+  background: #f9fafb;
+  transform: scale(1.002);
+}
+
+/* 🔥 STICKY HEADER (optional but 🔥) */
+.doctor-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+
+/* 🔥 FORCE TEXT COLOR */
+.doctor-modal input {
+  color: #000000 !important;        /* DARK TEXT */
+  background: #ffffff !important;   /* WHITE BG */
+  border: 2px solid #cbd5e1 !important;
+}
+
+/* 🔥 PLACEHOLDER FIX */
+.doctor-modal input::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* 🔥 FIX LABEL VISIBILITY */
+.doctor-modal label {
+  color: #334155 !important;
 }
