@@ -407,3 +407,18 @@ body {
 .doctor-modal label {
   color: #334155 !important;
 }
+
+.logout-btn {
+  padding: 8px 14px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  color: white;
+}

@@ -1,42 +1,23 @@
-const BASE = "http://localhost:5001/api";
+import api from "./axios";
 
+// 🔐 LOGIN
 export const loginUser = async (data) => {
-  const res = await fetch(`${BASE}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  const res = await api.post("/auth/login", data);
+  return res.data;
 };
 
-// attach token automatically
-const getToken = () => localStorage.getItem("token");
-
+// 📥 GET DOCTORS
 export const getDoctors = async () => {
-  const res = await fetch(`${BASE}/admin/doctors`, {
-    headers: {
-      Authorization: `Bearer ${getToken()}`
-    }
-  });
-  return res.json();
+  const res = await api.get("/admin/doctors");
+  return res.data;
 };
 
+// 🗑 DELETE
 export const deleteDoctor = async (id) => {
-  await fetch(`${BASE}/admin/doctors/${id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${getToken()}`
-    }
-  });
+  await api.delete(`/admin/doctors/${id}`);
 };
 
+// ✏️ UPDATE
 export const updateDoctor = async (id, data) => {
-  await fetch(`${BASE}/admin/doctors/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`
-    },
-    body: JSON.stringify(data)
-  });
+  await api.put(`/admin/doctors/${id}`, data);
 };

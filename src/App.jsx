@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import AdminDashboard from "./admin/AdminDashboard";
 import Login from "./admin/Login";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(
-    !!localStorage.getItem("token")
-  );
+  const auth = useSelector((state) => state.auth);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuth(false);
-  };
+  console.log("AUTH STATE:", auth);
 
-  return isAuth ? (
-    <AdminDashboard onLogout={handleLogout} />
+  // ✅ WAIT ONLY until rehydration is COMPLETE
+  if (!auth._persist?.rehydrated) {
+    return <div>Loading...</div>;
+  }
+
+  // ✅ AFTER rehydration → decide UI
+  return auth.isAuthenticated && auth.token ? (
+    <AdminDashboard />
   ) : (
-    <Login onLogin={() => setIsAuth(true)} />
+    <Login />
   );
 }
 

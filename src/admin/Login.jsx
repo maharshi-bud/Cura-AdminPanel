@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../store/authSlice";
+
 import { loginUser } from "../services/api";
 import docpic from "../img/Doc.png";
 import bg from "../img/BG.jpg";
 import "./login.css";
 
-function Login({ onLogin }) {
+function Login() {
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
@@ -20,9 +25,10 @@ function Login({ onLogin }) {
 
     try {
       const res = await loginUser(form);
+
       if (res.token) {
-        localStorage.setItem("token", res.token);
-        onLogin();
+        // 🔥 REDUX LOGIN
+        dispatch(loginSuccess(res));
       } else {
         setError(res.msg || "Invalid credentials");
       }

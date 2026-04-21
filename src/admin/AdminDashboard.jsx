@@ -8,6 +8,16 @@ import {
 } from "../services/api";
 import "./admin.css";
 
+import { useDispatch } from "react-redux";
+import { logout } from "../store/authSlice";
+
+
+
+
+
+
+
+
 function AdminDashboard() {
   const [doctors, setDoctors] = useState([]);
   const [search, setSearch] = useState("");
@@ -27,6 +37,12 @@ function AdminDashboard() {
   useEffect(() => {
     loadDoctors();
   }, []);
+
+  const dispatch = useDispatch();
+
+const handleLogout = () => {
+  dispatch(logout());
+};
 
   // 🗑 Delete
   const handleDelete = async (id) => {
@@ -71,15 +87,21 @@ function AdminDashboard() {
 
         {/* 🔷 HEADER */}
         <div className="header">
-          <h1>Admin Dashboard</h1>
+  <h1>Admin Dashboard</h1>
 
-          <input
-            type="text"
-            placeholder="Search doctor..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+  <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+    <input
+      type="text"
+      placeholder="Search doctor..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+    />
+
+    <button className="logout-btn" onClick={handleLogout}>
+      Logout
+    </button>
+  </div>
+</div>
 
         {/* 🔷 STATS */}
         <div className="stats">
