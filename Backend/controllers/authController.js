@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import AdminUser from "../models/AdminUser.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecret"; // put in .env in real app
-const JWT_EXPIRES = "5mins";
+const JWT_EXPIRES = "5m";
 
 // 🔐 REGISTER (run once to create admin)
 export const register = async (req, res) => {
