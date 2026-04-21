@@ -104,16 +104,61 @@ function AdminDashboard() {
         </div>
 
         {/* 🔷 GRID */}
-        <div className="grid">
-          {filteredDoctors.map((doc) => (
-            <DoctorCard
-              key={doc._id}
-              doc={doc}
-              onDelete={handleDelete}
-              onEdit={handleEdit}
-            />
-          ))}
-        </div>
+        <div className="table-container">
+
+  <table className="doctor-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Clinic</th>
+        <th>Specialization</th>
+        <th>Plan</th>
+        <th>Payment</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {filteredDoctors.map((doc) => (
+        <tr key={doc._id}>
+          
+          <td className="name-cell">
+            {/* <div className="avatar small">
+              {doc.fullName?.charAt(0)}
+            </div> */}
+            {doc.fullName}
+          </td>
+
+          <td>{doc.email}</td>
+          <td>{doc.clinicName}</td>
+          <td>{doc.specialization}</td>
+
+          <td>
+            <span className="tag">
+              {doc.plan?.name || "No Plan"}
+            </span>
+          </td>
+
+          <td>
+            <span className="tag secondary">
+              {doc.paymentMethod || "N/A"}
+            </span>
+          </td>
+
+          <td>
+            <div className="table-actions">
+              <button onClick={() => handleEdit(doc)}>Edit</button>
+              <button onClick={() => handleDelete(doc._id)}>Delete</button>
+            </div>
+          </td>
+
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+</div>
 
       </div>
 

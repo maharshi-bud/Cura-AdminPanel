@@ -343,3 +343,83 @@ body {
 .modal-actions .primary:hover {
   opacity: 0.9;
 }
+
+
+/* 🔷 TABLE CONTAINER */
+.table-container {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+/* 🔷 TABLE */
+.doctor-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* 🔷 HEADER */
+.doctor-table thead {
+  background: #f1f5f9;
+}
+
+.doctor-table th {
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* 🔷 ROWS */
+.doctor-table td {
+  padding: 14px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+/* 🔷 HOVER */
+.doctor-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* 🔷 NAME CELL */
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 🔷 SMALL AVATAR */
+.avatar.small {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+/* 🔷 ACTION BUTTONS */
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-actions button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* EDIT */
+.table-actions button:first-child {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+/* DELETE */
+.table-actions button:last-child {
+  background: #fee2e2;
+  color: #dc2626;
+}
