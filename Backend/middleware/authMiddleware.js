@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
+const JWT_SECRET = process.env.JWT_SECRET ;
 
 export const protect = (req, res, next) => {
+// console.log("JWT_SECRET middle:", JWT_SECRET); // DEBUG
+
   try {
     const header = req.headers.authorization;
     if (!header) return res.status(401).json({ msg: "No token" });

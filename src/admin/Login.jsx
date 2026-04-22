@@ -32,7 +32,9 @@ function Login() {
       } else {
         setError(res.msg || "Invalid credentials");
       }
-    } catch {
+    } 
+    
+    catch {
       setError("Server error");
     }
 

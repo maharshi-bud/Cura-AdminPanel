@@ -2,7 +2,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import AdminUser from "../models/AdminUser.js";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecret"; // put in .env in real app
+import dotenv from "dotenv";
+dotenv.config();
+
+// console.log("ENV TEST:", process.env.JWT_SECRET);
+
+const JWT_SECRET = process.env.JWT_SECRET ; // put in .env in real app
 const JWT_EXPIRES = "5m";
 
 // 🔐 REGISTER (run once to create admin)
@@ -29,6 +34,7 @@ export const register = async (req, res) => {
 
 // 🔐 LOGIN
 export const login = async (req, res) => {
+// console.log("JWT_SECRET controller:", JWT_SECRET); // DEBUG
   try {
     const { email, password } = req.body;
 

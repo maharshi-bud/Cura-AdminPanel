@@ -22,15 +22,15 @@ api.interceptors.request.use((config) => {
 });
 
 
-// 🚨 AUTO LOGOUT ON 401
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      store.dispatch(logout());
-    }
-    return Promise.reject(error);
-  }
-);
+// // 🚨 AUTO LOGOUT ON 401
+// api.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     if (error.response?.status === 401) {
+//       store.dispatch(logout());
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default api;
