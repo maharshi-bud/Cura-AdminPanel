@@ -96,7 +96,7 @@ function Login() {
               </span>
             </div>
 
-            <button disabled={loading}>
+            <button className="loginbtn" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}
             </button>
 

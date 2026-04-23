@@ -11,8 +11,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.15.1",
+    "chart.js": "^4.5.1",
     "concurrently": "^9.2.1",
     "react": "^19.2.5",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.5",
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0"

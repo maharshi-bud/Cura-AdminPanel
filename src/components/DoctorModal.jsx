@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./modal.css";
+import { updateDoctor } from "../services/api"; // ✅ IMPORT
 
 function DoctorModal({ isOpen, onClose, doctor, onSave }) {
   const [form, setForm] = useState({
@@ -7,7 +8,8 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
     email: "",
     clinicName: "",
     specialization: "",
-    experience: ""
+    experience: "",
+    paymentMethod: "" // ✅ FIXED
   });
 
   useEffect(() => {
@@ -17,7 +19,8 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
         email: doctor.email || "",
         clinicName: doctor.clinicName || "",
         specialization: doctor.specialization || "",
-        experience: doctor.experience || ""
+        experience: doctor.experience || "",
+        paymentMethod: doctor.paymentMethod || "" // ✅ FIXED
       });
     }
   }, [doctor]);
@@ -31,9 +34,18 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  // ✅ FIXED SUBMIT
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave({ ...doctor, ...form });
+
+    try {
+      await updateDoctor(doctor._id, form); // ✅ correct data
+
+      onSave();   // refresh table
+      onClose();  // close modal
+    } catch (err) {
+      console.error("Update failed:", err);
+    }
   };
 
   return (
@@ -46,7 +58,6 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
 
           <div className="form-grid">
 
-            {/* FULL NAME */}
             <div className="input-group">
               <label>Full Name</label>
               <input
@@ -54,11 +65,9 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
                 name="fullName"
                 value={form.fullName}
                 onChange={handleChange}
-                placeholder="Dr. John Doe"
               />
             </div>
 
-            {/* EMAIL */}
             <div className="input-group">
               <label>Email</label>
               <input
@@ -66,11 +75,9 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
-                placeholder="doctor@email.com"
               />
             </div>
 
-            {/* CLINIC */}
             <div className="input-group">
               <label>Clinic</label>
               <input
@@ -78,11 +85,9 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
                 name="clinicName"
                 value={form.clinicName}
                 onChange={handleChange}
-                placeholder="City Clinic"
               />
             </div>
 
-            {/* SPECIALIZATION */}
             <div className="input-group">
               <label>Specialization</label>
               <input
@@ -90,25 +95,36 @@ function DoctorModal({ isOpen, onClose, doctor, onSave }) {
                 name="specialization"
                 value={form.specialization}
                 onChange={handleChange}
-                placeholder="Cardiologist"
               />
             </div>
 
-            {/* EXPERIENCE */}
-            <div className="input-group full">
-              <label>Experience (years)</label>
+            <div className="input-group">
+              <label>Experience</label>
               <input
                 className="modal-input"
                 name="experience"
                 value={form.experience}
                 onChange={handleChange}
-                placeholder="5"
               />
+            </div>
+
+            <div className="input-group">
+              <label>Payment Method</label>
+              <select
+  className="modal-input"
+  name="paymentMethod"
+  value={form.paymentMethod}
+  onChange={handleChange}
+>
+  <option value="">Select Payment</option>
+  <option value="upi">UPI</option>
+  <option value="card">Card</option>
+  {/* <option value="cash">Cash</option> */}
+</select>
             </div>
 
           </div>
 
-          {/* ACTIONS */}
           <div className="modal-actions">
             <button
               type="button"
