@@ -8,7 +8,7 @@ import {
 import "./admin.css";
 
 import { useDispatch } from "react-redux";
-import { logout } from "../store/authSlice";
+import { logout } from "../Store/authSlice";
 
 import {
   PlanChart,
