@@ -6,7 +6,10 @@
   "scripts": {
     "client": "vite",
     "server": "cd Backend && npm run dev",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "vite build",
+    "start": "npm --prefix Backend start",
+    "postinstall": "npm install --prefix Backend"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",

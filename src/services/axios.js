@@ -3,7 +3,8 @@ import { store } from "../store/store";
 import { logout } from "../store/authSlice";
 
 const api = axios.create({
-  baseURL: "http://localhost:5002/api" , timeout:"8000"
+  baseURL: import.meta.env.VITE_API_URL || "/api",
+  timeout: 8000
 });
 
 

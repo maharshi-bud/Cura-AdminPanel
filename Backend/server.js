@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 // import adminRoutes from "./routes/adminRoutes.js";
 
@@ -11,16 +13,34 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const port = process.env.PORT || 5002;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientDistPath = path.resolve(__dirname, "../dist");
+const allowedOrigin = process.env.FRONTEND_URL;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigin || true,
+    credentials: true
+  })
+);
 app.use(express.json());
 
 // app.use("/api/admin", adminRoutes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", doctorRoutes);
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true });
+});
 
+app.use(express.static(clientDistPath));
 
-app.listen(5002, () => {
-  console.log("Admin server running on port 5002");
+app.get(/^(?!\/api).*/, (_req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
+
+app.listen(port, () => {
+  console.log(`Admin server running on port ${port}`);
 });

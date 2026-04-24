@@ -114,6 +114,43 @@ npm run dev
 
 ---
 
+## Railway Deployment
+
+This repo is set up for a single Railway service:
+
+- the frontend is built with Vite
+- the backend serves the built `dist/` folder
+- API requests use the same origin via `/api`
+
+### Build / Start
+
+- Build command: `npm run build`
+- Start command: `npm start`
+
+### Required Railway Variables
+
+```bash
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-jwt-secret
+NODE_ENV=production
+```
+
+### Optional Variables
+
+```bash
+PORT=5002
+FRONTEND_URL=https://your-app.up.railway.app
+VITE_API_URL=/api
+```
+
+### Local Development
+
+- frontend runs on Vite
+- `/api` is proxied to `http://localhost:5002`
+- backend still runs from `Backend/server.js`
+
+---
+
 ## 📊 Charts Included
 
 * 📈 Line Chart → Registrations trend
