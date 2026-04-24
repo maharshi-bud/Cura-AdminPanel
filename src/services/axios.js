@@ -1,6 +1,6 @@
 import axios from "axios";
-import { store } from "../store/store";
-import { logout } from "../store/authSlice";
+import { store } from "../Store/store";
+import { logout } from "../Store/authSlice";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "/api"
