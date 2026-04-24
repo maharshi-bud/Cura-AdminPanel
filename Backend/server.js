@@ -21,6 +21,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/admin", doctorRoutes);
 
 
-app.listen(5001, () => {
-  console.log("Admin server running on port 5001");
+app.listen(5002, () => {
+  console.log("Admin server running on port 5002");
 });

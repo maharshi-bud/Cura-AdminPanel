@@ -3,7 +3,7 @@ import { store } from "../store/store";
 import { logout } from "../store/authSlice";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001/api"
+  baseURL: "http://localhost:5002/api" , timeout:"8000"
 });
 
 
@@ -22,15 +22,15 @@ api.interceptors.request.use((config) => {
 });
 
 
-// // 🚨 AUTO LOGOUT ON 401
-// api.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     if (error.response?.status === 401) {
-//       store.dispatch(logout());
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+// 🚨 AUTO LOGOUT ON 401
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      store.dispatch(logout());
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

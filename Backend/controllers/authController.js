@@ -8,7 +8,7 @@ dotenv.config();
 // console.log("ENV TEST:", process.env.JWT_SECRET);
 
 const JWT_SECRET = process.env.JWT_SECRET ; // put in .env in real app
-const JWT_EXPIRES = "50m";
+const JWT_EXPIRES = "1h";
 
 // 🔐 REGISTER (run once to create admin)
 export const register = async (req, res) => {

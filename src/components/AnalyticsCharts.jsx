@@ -48,7 +48,7 @@ const baseOptions = {
 const normalizeChartData = (data) => (Array.isArray(data) ? data : []);
 
 // ✅ NORMAL BAR (Plan / Revenue / etc.)
-export function PlanChart({ data }) {
+export function PlanChart({ data, label = "Users" }) {
   const chartData = normalizeChartData(data);
 
   return (
@@ -56,7 +56,7 @@ export function PlanChart({ data }) {
       data={{
         labels: chartData.map(d => d.name),
         datasets: [{
-          label: "Users", // ✅ fixed label
+          label: label,
           data: chartData.map(d => d.value),
           backgroundColor: "#1f8a78",
           borderRadius: 8

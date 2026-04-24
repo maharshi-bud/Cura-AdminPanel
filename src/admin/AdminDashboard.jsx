@@ -183,9 +183,9 @@ const  planStats = Object.entries(
 //  const totRevenue = 0;
 
 const PLAN_PRICES = {
-  Starter: 19,
-  Enterprise: 49,
-  Professional: 39
+  Starter: 499,
+  Enterprise: 1999,
+  Professional: 999
 };
 
 const totRevenue = planStats.reduce((total, item) => {
@@ -375,7 +375,9 @@ const expiringChartData = {
       data: Object.keys(expiringMatrix).map(
         k => expiringMatrix[k]?.Enterprise || 0
       ),
-      backgroundColor: "#1f8a78"
+      backgroundColor: "#1f8a78",
+                borderRadius: 8
+
     }
   ]
 };
@@ -386,9 +388,9 @@ const monthlyRevenue = doctors.reduce((total, doc) => {
   if (!doc.plan?.name || !doc.createdAt) return total;
 
   const PLAN_PRICE = {
-    Starter: 20,
-    Professional: 50,
-    Enterprise: 39
+    Starter: 499,
+    Professional: 999,
+    Enterprise: 1999
   };
 
   const created = new Date(doc.createdAt);
@@ -408,6 +410,25 @@ const monthlyRevenue = doctors.reduce((total, doc) => {
 
 
 const fixedDailyStats = [...dailyStats].reverse();
+
+const getStatus = (doc) => {
+  if (!doc.createdAt || !doc.plan?.name) return "Unknown";
+
+  const PLAN_DURATION = {
+    Starter: 3,
+    Professional: 6,
+    Enterprise: 12
+  };
+
+  const duration = PLAN_DURATION[doc.plan.name];
+  if (!duration) return "Unknown";
+
+  const created = new Date(doc.createdAt);
+  const expiry = addMonthsSafe(created, duration);
+
+  return new Date() > expiry ? "Expired" : "Active";
+};
+
 
 
 
@@ -472,7 +493,7 @@ const fixedDailyStats = [...dailyStats].reverse();
 
     <div className="kpi-card">
       <h4>Revenue</h4>
-      <h2>${totRevenue}</h2>
+      <h2>₹{totRevenue}</h2>
     </div>
 
     <div className="kpi-card">
@@ -487,7 +508,7 @@ const fixedDailyStats = [...dailyStats].reverse();
     
     <div className="kpi-card">
   <h4>This Month</h4>
-  <h2>${monthlyRevenue}</h2>
+  <h2>₹{monthlyRevenue}</h2>
 </div>
   </div>
 
@@ -509,8 +530,8 @@ const fixedDailyStats = [...dailyStats].reverse();
 {/* ROW 2 */}
 <div className="dashboard-bottom">
   <div className="dashcard">
-
-    <PlanChart data={revenueStats} />
+          <h2>Revenue /month</h2>
+    <PlanChart data={revenueStats} label="Revenue ₹" />
   </div>
 
   <div className="dashcard">
@@ -660,6 +681,7 @@ const fixedDailyStats = [...dailyStats].reverse();
                     </th>
 
                     <th>Plan</th>
+                    <th>Status</th>
                     <th>Payment</th>
                     <th>Actions</th>
                   </tr>
@@ -675,6 +697,11 @@ const fixedDailyStats = [...dailyStats].reverse();
                       <td>{doc.plan?.name}</td>
 
                       <td>{doc.paymentMethod[0].toUpperCase()+ doc.paymentMethod.slice(1)}  </td>
+                      <td>
+  <span className={`status ${getStatus(doc).toLowerCase()}`}>
+    {getStatus(doc)}
+  </span>
+</td>
 
                       <td>
 
