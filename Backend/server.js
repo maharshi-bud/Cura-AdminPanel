@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
@@ -17,11 +18,22 @@ const port = process.env.PORT || 5002;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistPath = path.resolve(__dirname, "../dist");
-const allowedOrigin = process.env.FRONTEND_URL;
+const clientIndexPath = path.join(clientDistPath, "index.html");
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 app.use(
   cors({
-    origin: allowedOrigin || true,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
     credentials: true
   })
 );
@@ -35,11 +47,17 @@ app.get("/api/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.use(express.static(clientDistPath));
+if (fs.existsSync(clientIndexPath)) {
+  app.use(express.static(clientDistPath));
 
-app.get(/^(?!\/api).*/, (_req, res) => {
-  res.sendFile(path.join(clientDistPath, "index.html"));
-});
+  app.get(/^(?!\/api).*/, (_req, res) => {
+    res.sendFile(clientIndexPath);
+  });
+} else {
+  app.get("/", (_req, res) => {
+    res.json({ ok: true, service: "backend" });
+  });
+}
 
 app.listen(port, () => {
   console.log(`Admin server running on port ${port}`);

@@ -114,40 +114,52 @@ npm run dev
 
 ---
 
-## Railway Deployment
+## Simple Deployment
 
-This repo is set up for a single Railway service:
+The easiest production setup for this repo is:
 
-- the frontend is built with Vite
-- the backend serves the built `dist/` folder
-- API requests use the same origin via `/api`
+- **Frontend:** Vercel
+- **Backend:** Railway
 
-### Build / Start
+This avoids Docker and keeps the React app and Express API independent.
 
+### 1. Deploy the frontend to Vercel
+
+Use the repo root as the Vercel project.
+
+- Framework preset: `Vite`
 - Build command: `npm run build`
+- Output directory: `dist`
+
+Set this environment variable in Vercel:
+
+```bash
+VITE_API_URL=https://your-backend.up.railway.app/api
+```
+
+### 2. Deploy the backend to Railway
+
+Create a Railway service from the `Backend` folder.
+
+- Root directory: `Backend`
 - Start command: `npm start`
 
-### Required Railway Variables
+Set these environment variables in Railway:
 
 ```bash
 MONGO_URI=your-mongodb-connection-string
 JWT_SECRET=your-jwt-secret
 NODE_ENV=production
+FRONTEND_URL=https://your-frontend.vercel.app
 ```
 
-### Optional Variables
-
-```bash
-PORT=5002
-FRONTEND_URL=https://your-app.up.railway.app
-VITE_API_URL=/api
-```
+`FRONTEND_URL` can also be a comma-separated list if you want to allow both production and preview Vercel URLs.
 
 ### Local Development
 
 - frontend runs on Vite
 - `/api` is proxied to `http://localhost:5002`
-- backend still runs from `Backend/server.js`
+- backend runs from `Backend/server.js`
 
 ---
 
