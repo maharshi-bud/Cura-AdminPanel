@@ -26,18 +26,14 @@ const allowedOrigins = (process.env.FRONTEND_URL || "")
 
 app.use(
   cors({
-    origin(origin, callback) {
-      if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
-
-      callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true
+    origin: process.env.FRONTEND_URL || true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
 app.use(express.json());
+app.options("*", cors());
 
 // app.use("/api/admin", adminRoutes);
 
