@@ -157,6 +157,14 @@ h2 {
 .input-group input:focus {
   border-color: #1f8a78;
   box-shadow: 0 0 0 2px rgba(31,138,120,0.3);
+  
+    /* ✨ GLASS EFFECT */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  /* border: 1px solid rgba(255,255,255,0.2); */
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4);
 }
 
 /* 🔷 PASSWORD */
@@ -171,6 +179,7 @@ h2 {
   font-size: 12px;
   cursor: pointer;
   color: #1f8a78;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* 🔷 BUTTON */
