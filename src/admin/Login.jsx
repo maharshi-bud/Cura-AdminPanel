@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../store/authSlice";
+import { loginSuccess } from "../Store/authSlice";
 
 import { loginUser } from "../services/api";
 import docpic from "../img/Doc.png";
