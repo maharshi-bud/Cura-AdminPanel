@@ -5,7 +5,7 @@ import { loginSuccess } from "../Store/authSlice";
 import { loginUser } from "../services/api";
 import docpic from "../img/Doc.png";
 import bg from "../img/BG.jpg";
-import "./login.css";
+import "./Login.css";
 
 function Login() {
   const dispatch = useDispatch();
