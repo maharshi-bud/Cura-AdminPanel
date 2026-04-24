@@ -34,9 +34,15 @@ function Login() {
       }
     } 
     
-    catch {
-      setError("Server error");
-    }
+    catch (err) {
+  console.error(err); // optional debug
+
+  setError(
+    err?.response?.data?.msg ||   // backend message
+    err?.message ||               // JS error
+    "Server error"                // fallback
+  );
+} 
 
     setLoading(false);
   };
